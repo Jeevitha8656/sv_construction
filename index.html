@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SV Construction</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>SV Construction</h1>
+            <div class="hamburger" id="hamburger">
+                &#9776; <!-- ☰ symbol -->
+            </div>
+            <!-- <nav>
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav> -->
+            <nav id="nav-menu">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <div id="overlay"></div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Trusted Construction Services</h2>
+            <p>Quality residential & commercial construction with on-time delivery</p>
+            <a href="tel:9449261502" class="btn">Call Now</a>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="services" id="services">
+        <h2>Our Services</h2>
+        <div class="service-box">
+            <div class="card">🏠 House Construction</div>
+            <div class="card">🏢 Commercial Buildings</div>
+            <div class="card">🧱 Renovation & Remodeling</div>
+            <div class="card">🛠️ Interior Works</div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <!-- <section class="projects" id="projects">
+        <h2>Our Projects</h2>
+        <p>We have successfully completed multiple residential and commercial projects.</p>
+        <div class="project-gallery">
+            <div class="project">Project 1</div>
+            <div class="project">Project 2</div>
+            <div class="project">Project 3</div>
+        </div>
+    </section> -->
+
+    <section class="projects" id="projects">
+        <h2>Our Projects</h2>
+        <p>We have successfully delivered quality construction across multiple projects.</p>
+        <div class="project-gallery">
+            <div class="project">
+                <h3>✅ Completed</h3>
+                <p><span class="counter" data-target="500">0</span>+ Projects Done</p>
+            </div>
+            <div class="project">
+                <h3>🏗️ Ongoing</h3>
+                <p><span class="counter" data-target="10">0</span>+ Projects in Progress</p>
+            </div>
+            <div class="project">
+                <h3>💡 Upcoming</h3>
+                <p><span class="counter" data-target="5">0</span>+ Projects Planned</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <h2>Contact Us</h2>
+        <p>📍 JC Nagar,Kurubarahalli, Bengaluru</p>
+        <p>📞 +91 9449261502</p>
+        <p>📧 svconstruction@gmail.com</p>
+
+        <!-- <a href="https://wa.me/919449261502" class="btn">WhatsApp Us</a> -->
+         <a href="https://wa.me/919449261502?text=Hello!%20I%20am%20interested%20in%20your%20construction%20services.%20Please%20provide%20details." class="btn" target="_blank">
+  WhatsApp Us
+</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 SJ Construction. All rights reserved.</p>
+    </footer>
+
+    <!-- Add this script just BEFORE closing body tag -->
+<script>
+const counters = document.querySelectorAll('.counter');
+const projectSection = document.querySelector('#projects');
+
+const runCounters = () => {
+  counters.forEach(counter => {
+    counter.innerText = '0'; // reset before animating
+    const target = +counter.getAttribute('data-target');
+    const speed = 50; // smaller = faster
+    const updateCount = () => {
+      const count = +counter.innerText;
+      const increment = target / speed;
+      if(count < target){
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(updateCount, 30);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    updateCount();
+  });
+};
+
+// Intersection Observer
+const options = {
+  root: null,
+  threshold: 0.5 // trigger when 50% of the section is visible
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      runCounters();
+    }
+  });
+}, options);
+
+observer.observe(projectSection);
+
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+const overlay = document.getElementById('overlay');
+
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    overlay.classList.toggle('active');
+});
+
+overlay.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+    overlay.classList.remove('active');
+});
+</script>
+
+</body>
+</html>
